@@ -34,6 +34,8 @@ return new class extends Migration
             $table->string('estadoCivil')->nullable();
             $table->string('genero')->nullable();
             $table->string('departamento')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('provincia')->nullable();
             $table->string('idiomas')->nullable();
             $table->string('tipo')->nullable();
             $table->timestamps();

@@ -32,5 +32,7 @@ class Persona extends Model
         'departamento',
         'idiomas',
         'tipo',
+        'pais',
+        'provincia'
     ];
 }

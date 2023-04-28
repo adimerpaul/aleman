@@ -41,19 +41,19 @@
               <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.nombres" label="Nombres" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.nivel" :options="['Primaria', 'Secundaria']" label="Nivel" />
+              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.nivel" :options="['Inicial','Primaria', 'Secundaria']" label="Nivel" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.materia" :options="['Matematica', 'Lenguaje', 'Ciencias', 'Sociales', 'Ingles']" label="Materia" />
+              <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.materia" label="Materia" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.cursos" :options="['1ro', '2do', '3ro', '4to', '5to', '6to']" label="Curso" />
+              <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.cursos"  label="Curso" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.categoria" :options="['A', 'B', 'C', 'D', 'E']" label="Categoria" />
+              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.categoria" :options="['A', 'B', 'C', 'D']" label="Categoria" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.evaluacionDocente" :options="['A', 'B', 'C', 'D', 'E']" label="Evaluacion Docente" />
+              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.evaluacionDocente" :options="['Bueno','Regular','Malo']" label="Evaluacion Docente" />
             </div>
             <div class="col-12 col-md-3">
               <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.escuelaNormalSuperior" label="Escuela Normal Superior" />
@@ -62,7 +62,7 @@
               <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.rangoEvaluacion" label="Rango Evaluacion" />
             </div>
             <div class="col-12 col-md-3">
-              <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.planDeTrabajo" label="Plan de Trabajo" />
+              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.planDeTrabajo" label="Plan de Trabajo" :options="['Entregado','Sin entregar']" />
             </div>
             <div class="col-12 col-md-3">
               <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.formacionAcademica" label="Formacion Academica" />
@@ -95,10 +95,16 @@
               <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.genero" :options="['Masculino', 'Femenino']" label="Genero" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.departamento" :options="['La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Chuquisaca', 'Tarija', 'Beni', 'Pando']" label="Departamento" />
+              <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.pais" label="Pais" />
+            </div>
+            <div class="col-12 col-md-3">
+              <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.departamento" :options="['La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Chuquisaca', 'Tarija', 'Beni', 'Pando','Otros']" label="Departamento" />
             </div>
             <div class="col-12 col-md-3">
               <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.idiomas" label="Idiomas" />
+            </div>
+            <div class="col-12 col-md-3">
+              <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.provincia" label="Provincia" />
             </div>
             </div>
             <q-card-actions align="right" v-if="personaOption!='ver'">

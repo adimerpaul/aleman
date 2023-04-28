@@ -42,6 +42,22 @@
           :key="link.title"
           v-bind="link"
         />
+        <q-expansion-item
+          icon="o_people"
+          label="Talento humano"
+          caption="Talentos humano"
+          dense
+          :content-inset-level="0.5"
+        >
+          <q-item clickable v-close-popup v-ripple to="/plantel">
+            <q-item-section avatar><q-icon name="o_people" /></q-item-section>
+            <q-item-section><q-item-label>Plantel docente</q-item-label></q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup v-ripple to="/plantelAdministrativo">
+            <q-item-section avatar><q-icon name="o_assignment_ind" /></q-item-section>
+            <q-item-section><q-item-label>Plantel administrativo</q-item-label></q-item-section>
+          </q-item>
+        </q-expansion-item>
         <q-item clickable v-close-popup v-ripple @click="logout">
           <q-item-section avatar><q-icon name="exit_to_app" /></q-item-section>
           <q-item-section><q-item-label>Salir</q-item-label></q-item-section>
@@ -83,19 +99,19 @@ const linksList = [
     caption: 'Valores',
     icon: 'o_volunteer_activism',
     to: '/valores'
-  },
-  {
-    title: 'Plantel docente',
-    caption: 'Plantel docente',
-    icon: 'o_people',
-    to: '/plantel'
-  },
-  {
-    title: 'Plantel administrativo',
-    caption: 'Plantel administrativo',
-    icon: 'o_assignment_ind',
-    to: '/plantelAdministrativo'
   }
+  // {
+  //   title: 'Plantel docente',
+  //   caption: 'Plantel docente',
+  //   icon: 'o_people',
+  //   to: '/plantel'
+  // },
+  // {
+  //   title: 'Plantel administrativo',
+  //   caption: 'Plantel administrativo',
+  //   icon: 'o_assignment_ind',
+  //   to: '/plantelAdministrativo'
+  // }
 ]
 
 export default defineComponent({
