@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-lg text-justify fondo-letra">
+  <q-page class="q-pa-lg text-justify"
+          style="background-image: url('fondo.jpg'); background-size: cover; background-position: center center;">
     <div class="text-h3 text-center">Misión</div><br>
     <div class="text-subtitle2">Dotar a los alumnos y alumnas, a través de un trabajo solidario y mancomunado entre docentes, estudiantes y padres de familia, un ambiente afectivo y de respeto, proporcionándoles las estrategias necesarias que les permitan adquirir hábitos destrezas y habilidades para acceder a todas las áreas del conocimiento con la solvencia necesaria, enfrentar con éxito los desafíos de la vida diaria y estar preparados para lograr su profesionalización e incorporación al mundo laboral.</div><br>
     <div class="text-h3 text-center">Visión</div><br>

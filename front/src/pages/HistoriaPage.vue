@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-lg text-justify fondo-letra">
+  <q-page class="q-pa-lg text-justify fondo-letra"
+          style="background-image: url('fondo.jpg'); background-size: cover; background-position: center center;">
     <div class="text-subtitle2">Hacer una reseña histórica del Colegio Alemán, es tocar las fibras más íntimas de la educación de Oruro y de Bolivia, pues por sus aulas pasaron inmensa cantidad de estudiantes que hoy brillan en el campo intelectual, técnico y trabajan por el progreso de nuestra patria.</div>
 <br>
     <div class="text-subtitle2">El auge minero trajo consigo migración extranjera que tuvo que asentarse en nuestra ciudad constituyéndose en un principio en colonias cerradas. Estas tuvieron varias necesidades entre ellas la educativa bajo la línea pedagógica y la disciplina alemana.</div>

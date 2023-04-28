@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-sm fondo-letra">
+  <q-page class="q-pa-sm fondo-letra"
+          style="background-image: url('fondo.jpg'); background-size: cover; background-position: center center;">
     <q-table :loading="loading" dense title="Plantel Docente" :rows="personas" :filter="filter" :columns="columns" :rows-per-page-options="[0]">
       <template v-slot:top-right>
         <q-btn color="primary" label="Agregar" icon="o_add_circle_outline" @click="personaClick" no-caps />
