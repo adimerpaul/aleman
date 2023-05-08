@@ -1,9 +1,22 @@
 <template>
   <q-page class="q-pa-sm fondo-letra"
           style="background-image: url('fondo.jpg'); background-size: cover; background-position: center center;">
+<!--    <iframe id="docpdf" src="" frameborder="0" style="width: 100%;height: 100vh"></iframe>-->
+    <div class="row">
+      <div class="col-4 flex flex-center">
+        <q-btn color="green-10" label="Imprimir Inicial" icon="print" @click="imprimir('Inicial')" no-caps />
+      </div>
+      <div class="col-4 flex flex-center">
+        <q-btn color="blue-10" label="Imprimir Primaria" icon="print" @click="imprimir('Primaria')" no-caps />
+      </div>
+      <div class="col-4 flex flex-center">
+        <q-btn color="red-10" label="Imprimir Secundaria" icon="print" @click="imprimir('Secundaria')" no-caps />
+      </div>
+    </div>
     <q-table :loading="loading" dense title="Plantel Docente" :rows="personas" :filter="filter" :columns="columns" :rows-per-page-options="[0]">
       <template v-slot:top-right>
         <q-btn color="primary" label="Agregar" icon="o_add_circle_outline" @click="personaClick" no-caps />
+        <q-btn flat round dense icon="refresh" @click="personasGet" />
         <q-input outlined dense debounce="300" v-model="filter" placeholder="Search">
           <template v-slot:append>
             <q-icon name="search" />
@@ -15,7 +28,12 @@
           <q-btn dense flat round icon="edit" @click="personaClickEditar(props.row)" />
           <q-btn dense flat round icon="visibility" @click="personaClickVer(props.row)" />
           <q-btn dense flat round icon="delete" @click="personaClickDelete(props.row)" />
-          <q-btn dense flat round icon="picture_as_pdf" @click="personaClickPdf(props.row)" />
+<!--          <q-btn dense flat round icon="picture_as_pdf" @click="personaClickPdf(props.row)" />-->
+        </q-td>
+      </template>
+      <template v-slot:body-cell-nivel="props">
+        <q-td :props="props">
+          <q-chip :color="props.row.nivel=='Inicial'?'green':props.row.nivel=='Primaria'?'blue':'red'" dense text-color="white" :label="props.row.nivel" />
         </q-td>
       </template>
     </q-table>
@@ -116,12 +134,15 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+<!--    <pre>{{ personas }}</pre>-->
   </q-page>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 import { jsPDF } from 'jspdf'
+// import $ from 'jquery'
+import { date } from 'quasar'
 export default defineComponent({
   name: 'PlantelPage',
   data () {
@@ -154,10 +175,57 @@ export default defineComponent({
   created () {
     this.personasGet()
   },
+  mounted () {
+    // this.printInicial()
+  },
   methods: {
+    imprimir (type) {
+      // eslint-disable-next-line new-cap
+      const doc = new jsPDF()
+      doc.setFontSize(16)
+      doc.setFont('calibri', 'bold')
+      doc.text('PLANTEL DOCENTE', 100, 20, 'center')
+      doc.setFont('calibri', 'normal')
+      doc.setFontSize(12)
+      doc.text('FILTRO: INICIAL', 15, 25)
+      doc.rect(10, 28, 190, 10)
+      doc.line(50, 28, 50, 38)
+      doc.line(90, 28, 90, 38)
+      doc.line(130, 28, 130, 38)
+      doc.line(170, 28, 170, 38)
+      doc.setFont('calibri', 'bold')
+      doc.text('APELIDOS', 30, 33, 'center')
+      doc.text('NOMBRES', 70, 33, 'center')
+      doc.text('CURSOS', 110, 33, 'center')
+      doc.text('CARNET DE IDENTIDAD', 150, 32, { maxWidth: 40, align: 'center' })
+      doc.text('FECHA DE NACIMIENTO', 185, 32, { maxWidth: 40, align: 'center' })
+      doc.setFont('calibri', 'normal')
+      doc.setFontSize(11)
+      const personas = this.personas.filter(persona => persona.nivel === type)
+      personas.forEach((persona, index) => {
+        doc.text(persona.apellidos == null ? '' : persona.apellidos
+          , 30, 42 + (index * 10), { maxWidth: 40, align: 'center' })
+        doc.text(persona.nombres == null ? '' : persona.nombres
+          , 70, 42 + (index * 10), { maxWidth: 40, align: 'center' })
+        doc.text(persona.cursos == null ? '' : persona.cursos
+          , 110, 42 + (index * 10), { maxWidth: 40, align: 'center' })
+        doc.text(persona.carnetDeIdentidad == null ? '' : persona.carnetDeIdentidad
+          , 150, 45 + (index * 10), { maxWidth: 40, align: 'center' })
+        doc.text(persona.fechaDeNacimiento == null ? '' : persona.fechaDeNacimiento
+          , 185, 45 + (index * 10), { maxWidth: 40, align: 'center' })
+        doc.rect(10, 38 + (index * 10), 40, 10)
+        doc.rect(50, 38 + (index * 10), 40, 10)
+        doc.rect(90, 38 + (index * 10), 40, 10)
+        doc.rect(130, 38 + (index * 10), 40, 10)
+        doc.rect(170, 38 + (index * 10), 30, 10)
+      })
+      doc.save(type + date.formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss') + '.pdf')
+      // $('#docpdf').attr('src', doc.output('datauristring'))
+    },
     personaSubmit () {
       if (this.personaOption === 'crear') {
         this.loading = true
+        this.persona.tipo = 'docente'
         this.$axios.post('personas', this.persona).then(() => {
           this.personasGet()
           this.dialog = false
@@ -168,6 +236,7 @@ export default defineComponent({
         })
       } else if (this.personaOption === 'editar') {
         this.loading = true
+        this.persona.tipo = 'docente'
         this.$axios.put('personas/' + this.persona.id, this.persona).then(() => {
           this.personasGet()
           this.dialog = false
@@ -181,6 +250,7 @@ export default defineComponent({
     personaClick () {
       this.personaOption = 'crear'
       this.dialog = true
+      this.persona = {}
     },
     personaClickPdf () {
       // eslint-disable-next-line new-cap
@@ -217,8 +287,13 @@ export default defineComponent({
     },
     async personasGet () {
       this.loading = true
+      this.personas = []
       this.$axios.get('personas').then((response) => {
-        this.personas = response.data
+        response.data.forEach((persona) => {
+          if (persona.tipo === 'docente') {
+            this.personas.push(persona)
+          }
+        })
       }).catch((error) => {
         console.log(error)
       }).finally(() => {

@@ -9,8 +9,8 @@
           </div>
           <div class="text-subtitle2 text-grey text-center">Ingrese sus credenciales Por favor</div>
           <q-form class="" @submit="login">
-            <q-input outlined v-model="user.email" label="Email" type="email" class="bg-white" style="width: 300px"
-              :rules="[val => !!val || 'El email es requerido', val => /.+@.+\..+/.test(val) || 'El email debe ser válido']"
+            <q-input outlined v-model="user.email" label="Nombre de usuario" class="bg-white"
+              :rules="[val => !!val || 'El nombre de usuario es requerido']" style="width: 300px"
             />
             <q-input outlined v-model="user.password" label="Password" class="bg-white"
               :rules="[val => !!val || 'El password es requerido']" style="width: 300px"

@@ -38,6 +38,7 @@ return new class extends Migration
             $table->string('provincia')->nullable();
             $table->string('idiomas')->nullable();
             $table->string('tipo')->nullable();
+            $table->string('especialidad')->nullable();
             $table->timestamps();
         });
     }

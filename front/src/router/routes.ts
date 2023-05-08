@@ -6,6 +6,7 @@ import PlantelPage from 'pages/PlantelPage.vue'
 import HistoriaPage from 'pages/HistoriaPage.vue'
 import MisionVision from 'pages/MisionVision.vue'
 import ValoresPage from 'pages/ValoresPage.vue'
+import PlantelAdministrativoPage from 'pages/PlantelAdministrativoPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -14,6 +15,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: '', component: IndexPage, meta: { requiresAuth: true } },
       { path: 'plantel', component: PlantelPage, meta: { requiresAuth: true } },
+      { path: 'plantelAdministrativo', component: PlantelAdministrativoPage, meta: { requiresAuth: true } },
       { path: 'historia', component: HistoriaPage, meta: { requiresAuth: true } },
       { path: 'misionVision', component: MisionVision, meta: { requiresAuth: true } },
       { path: 'valores', component: ValoresPage, meta: { requiresAuth: true } }

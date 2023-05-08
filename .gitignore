@@ -1,7 +1,10 @@
 .DS_Store
 .thumbs.db
 node_modules
-
+aleman.rar
+aleman.exe
+laragon-wamp.exe
+/front/dist/electron/Packaged/Colegio Aleman-win32-x64/Colegio Aleman.exe
 # Quasar core related directories
 .quasar
 /dist

@@ -33,6 +33,7 @@ class Persona extends Model
         'idiomas',
         'tipo',
         'pais',
-        'provincia'
+        'provincia',
+        'especialidad'
     ];
 }
