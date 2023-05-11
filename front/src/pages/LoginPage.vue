@@ -10,8 +10,12 @@
           <div class="text-subtitle2 text-grey text-center">Ingrese sus credenciales Por favor</div>
           <q-form class="" @submit="login">
             <q-input outlined v-model="user.email" label="Nombre de usuario" class="bg-white"
-              :rules="[val => !!val || 'El nombre de usuario es requerido']" style="width: 300px"
-            />
+              :rules="[val => !!val || 'El nombre de usuario es requerido']" style="width: 300px" :type="visibleName ? 'text' : 'password'"
+            >
+              <template v-slot:append>
+                <q-icon :name="visibleName ? 'visibility' : 'visibility_off'" class="cursor-pointer" @click="visibleName = !visibleName" />
+              </template>
+            </q-input>
             <q-input outlined v-model="user.password" label="Password" class="bg-white"
               :rules="[val => !!val || 'El password es requerido']" style="width: 300px"
                      :type="visible ? 'text' : 'password'"
@@ -39,7 +43,8 @@ export default defineComponent({
         email: '',
         password: ''
       },
-      visible: false
+      visible: false,
+      visibleName: false
     }
   },
   created () {

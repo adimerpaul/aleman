@@ -92,6 +92,9 @@
             <div class="col-12 col-md-3">
               <q-select :readonly="personaOption=='ver'" outlined dense v-model="persona.departamento" :options="['La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Chuquisaca', 'Tarija', 'Beni', 'Pando','Otros']" label="Departamento" />
             </div>
+              <div class="col-12 col-md-3">
+                <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.provincia" label="Provincia" />
+              </div>
             <div class="col-12 col-md-3">
               <q-input :readonly="personaOption=='ver'" outlined dense v-model="persona.idiomas" label="Idiomas" />
             </div>
@@ -173,22 +176,28 @@ export default defineComponent({
       doc.setFont('calibri', 'normal')
       doc.setFontSize(11)
       // const personas = this.personas.filter(persona => persona.nivel === type)
+      let contador = 0
       this.personas.forEach((persona, index) => {
         doc.text(persona.apellidos == null ? '' : persona.apellidos
-          , 30, 42 + (index * 10), { maxWidth: 40, align: 'center' })
+          , 30, 42 + (contador * 10), { maxWidth: 40, align: 'center' })
         doc.text(persona.nombres == null ? '' : persona.nombres
-          , 70, 42 + (index * 10), { maxWidth: 40, align: 'center' })
+          , 70, 42 + (contador * 10), { maxWidth: 40, align: 'center' })
         doc.text(persona.especialidad == null ? '' : persona.especialidad
-          , 110, 42 + (index * 10), { maxWidth: 40, align: 'center' })
+          , 110, 42 + (contador * 10), { maxWidth: 40, align: 'center' })
         doc.text(persona.carnetDeIdentidad == null ? '' : persona.carnetDeIdentidad
-          , 150, 45 + (index * 10), { maxWidth: 40, align: 'center' })
+          , 150, 45 + (contador * 10), { maxWidth: 40, align: 'center' })
         doc.text(persona.fechaDeNacimiento == null ? '' : persona.fechaDeNacimiento
-          , 185, 45 + (index * 10), { maxWidth: 40, align: 'center' })
-        doc.rect(10, 38 + (index * 10), 40, 10)
-        doc.rect(50, 38 + (index * 10), 40, 10)
-        doc.rect(90, 38 + (index * 10), 40, 10)
-        doc.rect(130, 38 + (index * 10), 40, 10)
-        doc.rect(170, 38 + (index * 10), 30, 10)
+          , 185, 45 + (contador * 10), { maxWidth: 40, align: 'center' })
+        doc.rect(10, 38 + (contador * 10), 40, 10)
+        doc.rect(50, 38 + (contador * 10), 40, 10)
+        doc.rect(90, 38 + (contador * 10), 40, 10)
+        doc.rect(130, 38 + (contador * 10), 40, 10)
+        doc.rect(170, 38 + (contador * 10), 30, 10)
+        contador++
+        if ((index + 1) % 22 === 0) {
+          contador = 0
+          doc.addPage()
+        }
       })
       doc.save('Plantel Administrativo' + date.formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss') + '.pdf')
       // $('#docpdf').attr('src', doc.output('datauristring'))
@@ -253,7 +262,26 @@ export default defineComponent({
     },
     personaClickEditar (persona) {
       this.personaOption = 'editar'
-      this.persona = persona
+      this.persona = {
+        id: persona.id,
+        apellidos: persona.apellidos,
+        nombres: persona.nombres,
+        especialidad: persona.especialidad,
+        formacionAcademica: persona.formacionAcademica,
+        cursosDeActualizacion: persona.cursosDeActualizacion,
+        antiguedadEnElColegio: persona.antiguedadEnElColegio,
+        carnetDeIdentidad: persona.carnetDeIdentidad,
+        celular: persona.celular,
+        telefono: persona.telefono,
+        fechaDeNacimiento: persona.fechaDeNacimiento,
+        tipoDeSangre: persona.tipoDeSangre,
+        estadoCivil: persona.estadoCivil,
+        genero: persona.genero,
+        pais: persona.pais,
+        departamento: persona.departamento,
+        provincia: persona.provincia,
+        idiomas: persona.idiomas
+      }
       this.dialog = true
     },
     async personasGet () {
